@@ -1,19 +1,32 @@
-game.bootstrap = (function() {
+game.bootstrap = (() => {
   const scripts = [
+    { src: ['src/render/graphics.js'], id: 'render' },
+    { src: ['src/components/component.js', 'src/components/position.js', 'src/components/appearence.js'], id: 'components' },
+    { src: ['src/entities/entity.js'], id: 'entity' },
+    { src: ['src/entities/bigblue.js'], id: 'entities' },
+    { src: ['src/systems/render.js'], id: 'systems' },
     { src: ['src/game.js'], id: 'game' },
   ];
-  const assets = {
-    bigblue: 'assets/image/bigblue.png',
-  };
+  const assets = {};
+  [
+    "bigblue", "flag", "floor", "grass", "hedge", "liquid", "rock", 
+    "wall", "wordBigBlue", "wordFlag", "wordIs", "wordKill", "wordLava", 
+    "wordPush", "wordRock", "wordSink", "wordStop", "wordWall", "wordWater", 
+    "wordWin", "wordYou"
+  ].map((x) => assets[x] = `assets/image/${x}.png`);
+  [
+    "background-music", "death", "move", "win"
+  ].map((x) => assets[x] = `assets/sound/${x}.mp3`);
 
   const loadScripts = function(onDone) {
-    while (scripts.length) {
+    if (scripts.length) {
       let script = scripts.shift();
       require(script.src, () => {
-        onDone(script);
+        loadScripts(onDone);
       });
+    } else {
+      onDone();
     }
-    console.log('scripts loaded');
   }
 
   const loadAsset = (source) => {
@@ -28,6 +41,7 @@ game.bootstrap = (function() {
         asset = new Audio();
       }
       asset.src = URL.createObjectURL(r);
+      asset.onload = () => URL.revokeObjectURL(asset.src);
       return asset;
     })
   }
@@ -48,9 +62,6 @@ game.bootstrap = (function() {
 
   game.assets = {};
   loadAssets().then(() => {
-    loadScripts((script) => {
-      game.initialize();
-    });
+    loadScripts(() => game.initialize());
   })
-  
 })();

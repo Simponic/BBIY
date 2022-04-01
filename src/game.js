@@ -1,10 +1,15 @@
-const context = document.getElementById('game-canvas').getContext('2d');
-context.imageSmoothingEnabled = false;
+game.loop = (elapsedTime) => {
+  game.systems.Render.update(elapsedTime);
 
-console.log("HELLO")
+  requestAnimationFrame(game.loop);
+}
+
 game.initialize = () => {
-  context.clearRect(0, 0, game.width, game.height);
-  context.drawImage(game.assets.bigblue, 0, 0, game.width, game.height);
-
-  console.log("BITCH")
+  game.entities = {};
+  game.bigBlue = game.createBigBlue();
+  game.entities[game.bigBlue.id] = game.bigBlue;
+  game.bigBlue2 = game.createBigBlue();
+  game.bigBlue2.components.position = game.components.Position({x: 200, y: 100});
+  game.entities[game.bigBlue2.id] = game.bigBlue2;
+  requestAnimationFrame(game.loop);
 }

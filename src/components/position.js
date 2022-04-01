@@ -1,0 +1,1 @@
+game.components.Position = ({x, y}) => game.Component('position', {x, y})
