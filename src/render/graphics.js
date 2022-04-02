@@ -3,10 +3,9 @@ game.graphics = (
   (context) => {
     context.imageSmoothingEnabled = false;
     const clear = () => {
-      context.clearRect(0, 0, game.width, game.height);
+      context.clearRect(0, 0, game.canvas.width, game.canvas.height);
     };
     
-    // Maybe this should be a component?
     const Sprite = ({image, spriteX, spriteY, spriteWidth, spriteHeight, timePerFrame, cols, rows, numFrames, drawFunction}) => {
       timePerFrame = timePerFrame ?? 100;
       numFrames = numFrames ?? 1;

@@ -1,30 +1,32 @@
 game.bootstrap = (() => {
   const scripts = [
-    { src: ['src/render/graphics.js'], id: 'render' },
-    { src: ['src/components/component.js', 'src/components/position.js', 'src/components/appearence.js'], id: 'components' },
-    { src: ['src/entities/entity.js'],      id: 'entity' },
-    { src: ['src/entities/bigblue.js'],     id: 'entities' },
-    { src: ['src/entities/flag.js'],        id: 'entities' },
-    { src: ['src/entities/floor.js'],       id: 'entities' },
-    { src: ['src/entities/grass.js'],       id: 'entities' },
-    { src: ['src/entities/hedge.js'],       id: 'entities' },
-    { src: ['src/entities/liquid.js'],      id: 'entities' },
-    { src: ['src/entities/rock.js'],        id: 'entities' },
-    { src: ['src/entities/wall.js'],        id: 'entities' },
-    { src: ['src/entities/wordBigBlue.js'], id: 'entities' },
-    { src: ['src/entities/wordFlag.js'],    id: 'entities' },
-    { src: ['src/entities/wordIs.js'],      id: 'entities' },
-    { src: ['src/entities/wordKill.js'],    id: 'entities' },
-    { src: ['src/entities/wordLava.js'],    id: 'entities' },
-    { src: ['src/entities/wordPush.js'],    id: 'entities' },
-    { src: ['src/entities/wordRock.js'],    id: 'entities' },
-    { src: ['src/entities/wordSink.js'],    id: 'entities' },
-    { src: ['src/entities/wordStop.js'],    id: 'entities' },
-    { src: ['src/entities/wordWall.js'],    id: 'entities' },
-    { src: ['src/entities/wordWater.js'],   id: 'entities' },
-    { src: ['src/entities/wordWin.js'],     id: 'entities' },
-    { src: ['src/entities/wordYou.js'],     id: 'entities' },
-    { src: ['src/systems/render.js'], id: 'systems' },
+    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js'], id: 'utils'},
+    { src: ['src/render/graphics.js'], id: 'graphics' },
+    { src: ['src/components/component.js'], id: 'component' },
+    { 
+      src: [
+        'src/components/position.js', 'src/components/momentum.js', 'src/components/gridPosition.js',
+        'src/components/appearence.js'
+      ],
+      id: 'components'
+    },
+    { src: ['src/entities/entity.js'], id: 'entity' },
+    { 
+      src: [
+        'src/entities/bigblue.js', 'src/entities/flag.js', 'src/entities/floor.js', 'src/entities/grass.js', 'src/entities/hedge.js',
+        'src/entities/liquid.js', 'src/entities/rock.js', 'src/entities/wall.js', 'src/entities/wordBigBlue.js', 
+        'src/entities/wordFlag.js', 'src/entities/wordIs.js', 'src/entities/wordKill.js', 'src/entities/wordLava.js',
+        'src/entities/wordPush.js', 'src/entities/wordRock.js', 'src/entities/wordSink.js', 'src/entities/wordStop.js', 
+        'src/entities/wordWall.js', 'src/entities/wordWater.js', 'src/entities/wordWin.js', 'src/entities/wordYou.js'
+      ],
+      id: 'entities'
+    },
+    { src: ['src/systems/system.js'], id: 'system' },
+    { 
+      src: [
+        'src/systems/render.js', 'src/systems/gridSystem.js', 'src/systems/physics.js'
+      ],
+      id: 'systems' },
     { src: ['src/game.js'], id: 'game' },
   ];
   const assets = {};

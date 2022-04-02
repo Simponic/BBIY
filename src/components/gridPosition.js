@@ -1,0 +1,1 @@
+game.components.GridPosition = ({x, y}) => game.Component('gridPosition', {x, y});

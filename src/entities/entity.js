@@ -5,13 +5,14 @@ game.Entity = (id=game.nextId++) => {
 
   const addComponent = (component) => {
     components[component.name] = component;
-  }
-  const removeComponent = (component) => {
-    delete components[component.name];
-  }
-  const hasComponent = (component) => {
-    components[component.name] !== undefined;
-  }
+  };
+  const hasComponent = (componentName) => components[componentName] !== undefined;
+  const removeComponent = (componentName) => {
+    if (hasComponent(componentName)) {
+      delete components[componentName];
+    }
+  };
+  
 
   return {
     id,
