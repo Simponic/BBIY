@@ -52,6 +52,16 @@ game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
           });
 
           // TODO: Loop in momentum direction until we find an entity that does not have "push" component
+          const proposed = {x: entity.components.gridPosition.x + momentumVector.dx, y: entity.components.gridPosition.y + momentumVector.dy}
+					
+					const entitiesInCell = entitiesGrid[proposed.x][proposed.y];
+
+					for (let id in entitiesInCell) {
+						if (entitiesInCell[id].hasComponent("pushable")) {
+							entitiesInCell[id].addComponent(game.components.Momentum({...momentumVector}));
+						}
+					} 
+
           entity.components.gridPosition.x = entity.components.gridPosition.x + momentumVector.dx;
           entity.components.gridPosition.y = entity.components.gridPosition.y + momentumVector.dy;
 

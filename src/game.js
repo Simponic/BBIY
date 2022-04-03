@@ -29,6 +29,7 @@ game.initialize = () => {
   Array(400).fill(null).forEach((_, i) => {
     const bigBlue = game.createBigBlue();
     bigBlue.addComponent(game.components.GridPosition({x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 13)}));
+		bigBlue.addComponent(game.components.Pushable());
     game.entities[bigBlue.id] = bigBlue;
   });
 
@@ -36,6 +37,7 @@ game.initialize = () => {
   game.rock.addComponent(game.components.Position({x: 200, y: 200}));
   game.rock.addComponent(game.components.GridPosition({x: 0, y: 0}));
   game.rock.addComponent(game.components.Controllable({controls: ['left', 'right', 'up', 'down']}));
+	game.rock.addComponent(game.components.Pushable());
   game.entities[game.rock.id] = game.rock;
 
   lastTimeStamp = performance.now()
