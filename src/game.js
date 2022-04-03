@@ -11,7 +11,7 @@ game.loop = (timeStamp) => {
 }
 
 game.initialize = () => {
-  game.systemOrder = ["render", "physics", "gridSystem"];
+  game.systemOrder = ["render", "physics", "gridSystem", "keyboardInput"];
   game.systems = {
     render: game.system.Render(game.graphics),
     physics: game.system.Physics(),
@@ -21,6 +21,7 @@ game.initialize = () => {
       canvasWidth: game.canvas.width,
       canvasHeight: game.canvas.height,
     }),
+    keyboardInput: game.system.KeyboardInput(),
   };
 
   game.entities = {};
@@ -34,6 +35,7 @@ game.initialize = () => {
   game.rock = game.createRock();
   game.rock.addComponent(game.components.Position({x: 200, y: 200}));
   game.rock.addComponent(game.components.GridPosition({x: 0, y: 0}));
+  game.rock.addComponent(game.components.Controllable({controls: ['left', 'right', 'up', 'down']}));
   game.entities[game.rock.id] = game.rock;
 
   lastTimeStamp = performance.now()
