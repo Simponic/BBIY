@@ -1,6 +1,6 @@
 game.bootstrap = (() => {
   const scripts = [
-    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js'], id: 'utils'},
+    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js', 'src/utils/clamp.js'], id: 'utils'},
     { src: ['src/render/graphics.js'], id: 'graphics' },
     { src: ['src/components/component.js'], id: 'component' },
     { 

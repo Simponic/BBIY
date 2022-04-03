@@ -6,8 +6,7 @@ game.system.Physics = () => {
         const {dx, dy} = entity.components.momentum;
         entity.components.position.x += dx * elapsedTime;
         entity.components.position.y += dy * elapsedTime;
-        entity.components.position.x = Math.max(0, Math.min(game.canvas.width - entity.components.appearance.width, entity.components.position.x));
-        entity.components.position.y = Math.max(0, Math.min(game.canvas.height - entity.components.appearance.height, entity.components.position.y));
+        entity.components.position = clamp(entity.components.position, game.canvas.width - entity.components.appearance.width, game.canvas.height - entity.components.appearance.height);
       }
     }
   }

@@ -52,18 +52,31 @@ game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
           });
 
           // TODO: Loop in momentum direction until we find an entity that does not have "push" component
-          const proposed = {x: entity.components.gridPosition.x + momentumVector.dx, y: entity.components.gridPosition.y + momentumVector.dy}
+          const proposed = {
+            x: entity.components.gridPosition.x + momentumVector.dx,
+            y: entity.components.gridPosition.y + momentumVector.dy
+          };
 					
-					const entitiesInCell = entitiesGrid[proposed.x][proposed.y];
+          const proposedCopy = {...proposed};
+          let found = false;
+          do {
+            found = false;
+            const entitiesInCell = entitiesGrid[proposedCopy.y][proposedCopy.x];
+            entitiesInCell.forEach((entity) => {
+              if (entity.hasComponent("pushable")) {
+                entity.addComponent(game.components.Momentum({...momentumVector}));
+                found = true;
+              }
+            });
+            proposedCopy.x += momentumVector.dx;
+            proposedCopy.y += momentumVector.dy;
+            const proposedCopyInBounds = clamp(proposedCopy, xDim, yDim);
+            if (!equivalence(proposedCopyInBounds, proposedCopy)) {
+              found = false;
+            }
+          } while (found);
 
-					for (let id in entitiesInCell) {
-						if (entitiesInCell[id].hasComponent("pushable")) {
-							entitiesInCell[id].addComponent(game.components.Momentum({...momentumVector}));
-						}
-					} 
-
-          entity.components.gridPosition.x = entity.components.gridPosition.x + momentumVector.dx;
-          entity.components.gridPosition.y = entity.components.gridPosition.y + momentumVector.dy;
+          entity.components.gridPosition = {...entity.components.gridPosition, ...proposed};
 
           entity.components.position = {
             ...entity.components.position,

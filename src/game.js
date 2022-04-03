@@ -26,7 +26,7 @@ game.initialize = () => {
 
   game.entities = {};
 
-  Array(400).fill(null).forEach((_, i) => {
+  Array(10).fill(null).forEach((_, i) => {
     const bigBlue = game.createBigBlue();
     bigBlue.addComponent(game.components.GridPosition({x: Math.floor(Math.random() * 15), y: Math.floor(Math.random() * 13)}));
 		bigBlue.addComponent(game.components.Pushable());
