@@ -21,9 +21,9 @@ game.system.KeyboardInput = () => {
           entity.addComponent(game.components.Momentum({ dx: 0, dy: 1 }));
         }
 
-        Object.keys(keys).map((key) => delete keys[key]);
       }
     }
+    Object.keys(keys).map((key) => delete keys[key]);
   };
   window.addEventListener("keydown", keyPress);
   return { keys, update };
