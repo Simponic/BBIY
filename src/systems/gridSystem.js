@@ -51,30 +51,31 @@ game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
             dy: newGridCoords.y - oldGridCoords.y,
           });
 
-          // TODO: Loop in momentum direction until we find an entity that does not have "push" component
           const proposed = {
             x: entity.components.gridPosition.x + momentumVector.dx,
             y: entity.components.gridPosition.y + momentumVector.dy
           };
 					
           const proposedCopy = {...proposed};
-          let found = false;
-          do {
-            found = false;
-            const entitiesInCell = entitiesGrid[proposedCopy.y][proposedCopy.x];
-            entitiesInCell.forEach((entity) => {
-              if (entity.hasComponent("pushable")) {
-                entity.addComponent(game.components.Momentum({...momentumVector}));
-                found = true;
-              }
-            });
-            proposedCopy.x += momentumVector.dx;
-            proposedCopy.y += momentumVector.dy;
-            const proposedCopyInBounds = clamp(proposedCopy, xDim, yDim);
-            if (!equivalence(proposedCopyInBounds, proposedCopy)) {
+          if (entity.hasComponent("controllable")) {
+            let found = false;
+            do {
               found = false;
-            }
-          } while (found);
+              const entitiesInCell = entitiesGrid[proposedCopy.y][proposedCopy.x];
+              entitiesInCell.forEach((entity) => {
+                if (entity.hasComponent("pushable")) {
+                  entity.addComponent(game.components.Momentum({...momentumVector}));
+                  found = true;
+                }
+              });
+              proposedCopy.x += momentumVector.dx;
+              proposedCopy.y += momentumVector.dy;
+              const proposedCopyInBounds = clamp(proposedCopy, xDim-1, yDim-1);
+              if (!equivalence(proposedCopyInBounds, proposedCopy)) {
+                found = false;
+              }
+            } while (found);
+          }
 
           entity.components.gridPosition = {...entity.components.gridPosition, ...proposed};
 
