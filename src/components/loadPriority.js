@@ -1,0 +1,1 @@
+game.components.LoadPriority = ({priority}) => game.Component('loadPriority', {priority});

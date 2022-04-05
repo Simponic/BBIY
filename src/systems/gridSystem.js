@@ -1,11 +1,11 @@
-game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
+game.system.GridSystem = ({ xDim, yDim }) => {
   const entitiesGrid = Array(yDim).fill(null).map(() => Array(xDim).fill(null).map(() => new Map()));
 
-  const gridWidth = canvasWidth / xDim;
-  const gridHeight = canvasHeight / yDim;
+  let gridWidth = game.canvas.width / xDim;
+  let gridHeight = game.canvas.height / yDim;
 
   const gameCoordsToGrid = ({ x, y }) => {
-    return { x: Math.floor((x+gridWidth/2) / canvasWidth * xDim), y: Math.floor((y+gridHeight/2) / canvasHeight * yDim) };
+    return { x: Math.floor((x+gridWidth/2) / game.canvas.width * xDim), y: Math.floor((y+gridHeight/2) / game.canvas.height * yDim) };
   };
 
   const gridCoordsToGame = ({ x, y }) => {
@@ -39,8 +39,8 @@ game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
     rebuildGrid(gridEntities);
     gridEntities.map((entity) => {
       if (entity.hasComponent("appearance")) {
-        entity.components.appearance.width = canvasWidth / xDim;
-        entity.components.appearance.height = canvasHeight / yDim;
+        entity.components.appearance.width = gridWidth;
+        entity.components.appearance.height = gridHeight;
       }
       if (entity.hasComponent("position")) {
         const newGridCoords = gameCoordsToGrid(entity.components.position);
@@ -89,7 +89,9 @@ game.system.GridSystem = ({ xDim, yDim, canvasWidth, canvasHeight }) => {
             entity.components.momentum.dy = 0;
           }
         }
-      }
+      } else {
+        entity.addComponent(game.components.Position({...gridCoordsToGame(entity.components.gridPosition)}));    
+      };
     });
   };
 

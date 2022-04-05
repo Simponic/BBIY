@@ -1,12 +1,13 @@
 game.bootstrap = (() => {
   const scripts = [
-    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js', 'src/utils/clamp.js'], id: 'utils'},
-    { src: ['src/render/graphics.js'], id: 'graphics' },
+    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js', 'src/utils/clamp.js', 'src/utils/loadLevel.js'], id: 'utils'},
+    { src: ['src/render/graphics.js', 'src/render/sprites.js'], id: 'graphics' },
     { src: ['src/components/component.js'], id: 'component' },
     { 
       src: [
         'src/components/position.js', 'src/components/momentum.js', 'src/components/gridPosition.js',
         'src/components/appearence.js', 'src/components/controllable.js', 'src/components/pushable.js',
+        'src/components/loadPriority.js', 
       ],
       id: 'components'
     },
@@ -69,6 +70,7 @@ game.bootstrap = (() => {
   }
 
   const loadAssets = function() {
+    game.assets = {};
     const promises = [];
     for (let key in assets) {
       promises.push(loadAsset(assets[key], (asset) => {
@@ -82,8 +84,14 @@ game.bootstrap = (() => {
     }));
   }
 
-  game.assets = {};
-  loadAssets().then(() => {
+  const loadLevels = function() {
+    game.levels = [];
+    fetch('/levels')
+      .then((r) => r.json())
+      .then((r) => game.levels = r);
+  }
+
+  Promise.all([loadAssets(), loadLevels()]).then(() => {
     loadScripts(() => game.initialize());
   })
 })();
