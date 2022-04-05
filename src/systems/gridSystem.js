@@ -52,6 +52,8 @@ game.system.GridSystem = ({ xDim, yDim }) => {
           });
 
           const proposed = {...newGridCoords};
+          let wall = false;
+          let entitiesToPush = [];
           if (entity.hasComponent("controllable")) {
             let found = false;
             do {
@@ -60,7 +62,12 @@ game.system.GridSystem = ({ xDim, yDim }) => {
               for (let entity of entitiesInCell.values()) {
                 if (entity.hasComponent("pushable")) {
                   found = true;
-                  entity.addComponent(game.components.Momentum({...momentumVector}));
+                  entitiesToPush.push(entity);
+                }
+                if (entity.hasComponent("stop")) {
+                  wall = true;
+                  found = false;
+                  break;
                 }
               }
               proposed.x += momentumVector.dx;
@@ -72,17 +79,28 @@ game.system.GridSystem = ({ xDim, yDim }) => {
             } while (found);
           }
 
-          if (entity.hasComponent("pushable") || entity.hasComponent("controllable")) {
-            for (let e of entitiesGrid[newGridCoords.y][newGridCoords.x].values()) {
-              if (e.hasComponent("stop")) {
-                newGridCoords = oldGridCoords;
-                break;
-              }
+          if (entity.hasComponent("controllable")) {
+            if (!wall) {
+              entity.components.gridPosition = {...entity.components.gridPosition, ...newGridCoords};
+              entitiesToPush.map((e) => e.addComponent(game.components.Momentum({...momentumVector})));
             }
-            entity.addComponent(game.components.Momentum({...momentumVector}));
+            const particles = game.createBorderParticles({
+              colors: ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#FF00FF", "#00FFFF"],
+              maxAmount: 100,
+              minAmount: 25,
+              minLife: 100,
+              maxLife: 300,
+              minRadius: 1,
+              maxRadius: 3,
+              maxSpeed: 0.15,
+            });
+            particles.addComponent(game.components.Position(gridCoordsToGame(oldGridCoords)));
+            particles.addComponent(game.components.Appearance({width: 50, height: 50}));
+            game.entities[particles.id] = particles;
+          } else {
+            entity.components.gridPosition = {...entity.components.gridPosition, ...newGridCoords};
           }
 
-          entity.components.gridPosition = {...entity.components.gridPosition, ...newGridCoords};
 
           entity.components.position = {
             ...entity.components.position,

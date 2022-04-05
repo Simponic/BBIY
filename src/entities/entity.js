@@ -13,7 +13,6 @@ game.Entity = (id=game.nextId++) => {
     }
   };
   
-
   return {
     id,
     components,

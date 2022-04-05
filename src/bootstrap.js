@@ -1,13 +1,19 @@
 game.bootstrap = (() => {
   const scripts = [
-    { src: ['src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js', 'src/utils/clamp.js', 'src/utils/loadLevel.js'], id: 'utils'},
+    { 
+      src: [
+        'src/utils/objectEquivalence.js', 'src/utils/unitizeVector.js', 'src/utils/clamp.js', 'src/utils/loadLevel.js',
+        'src/utils/randInRange.js'
+      ],
+      id: 'utils'
+    },
     { src: ['src/render/graphics.js', 'src/render/sprites.js'], id: 'graphics' },
     { src: ['src/components/component.js'], id: 'component' },
     { 
       src: [
         'src/components/position.js', 'src/components/momentum.js', 'src/components/gridPosition.js',
         'src/components/appearence.js', 'src/components/controllable.js', 'src/components/pushable.js',
-        'src/components/loadPriority.js', 'src/components/stop.js'
+        'src/components/loadPriority.js', 'src/components/stop.js', 'src/components/alive.js',
       ],
       id: 'components'
     },
@@ -18,7 +24,8 @@ game.bootstrap = (() => {
         'src/entities/liquid.js', 'src/entities/rock.js', 'src/entities/wall.js', 'src/entities/wordBigBlue.js', 
         'src/entities/wordFlag.js', 'src/entities/wordIs.js', 'src/entities/wordKill.js', 'src/entities/wordLava.js',
         'src/entities/wordPush.js', 'src/entities/wordRock.js', 'src/entities/wordSink.js', 'src/entities/wordStop.js', 
-        'src/entities/wordWall.js', 'src/entities/wordWater.js', 'src/entities/wordWin.js', 'src/entities/wordYou.js'
+        'src/entities/wordWall.js', 'src/entities/wordWater.js', 'src/entities/wordWin.js', 'src/entities/wordYou.js',
+        'src/entities/borderParticles.js'
       ],
       id: 'entities'
     },

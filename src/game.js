@@ -3,9 +3,16 @@ game.loop = (timeStamp) => {
   let elapsedTime = timeStamp - lastTimeStamp;
   lastTimeStamp = timeStamp;
 
+
   game.systemOrder.map((i) => {
     game.systems[i].update(elapsedTime, game.entities);
   });
+
+  for (let id in game.entities) {
+    if (!game.entities[id].hasComponent("alive")) {
+      delete game.entities[id];
+    }
+  }
 
   if (game.nextLevel) {
     game.loadLevel(game.nextLevel);
@@ -25,7 +32,6 @@ game.initialize = () => {
     gridSystem: game.system.GridSystem({...game.config}),
     keyboardInput: game.system.KeyboardInput(),
   };
-
 
   lastTimeStamp = performance.now()
   requestAnimationFrame(game.loop);

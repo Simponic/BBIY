@@ -3,6 +3,7 @@ game.createWordWall = () => {
   wordWall.addComponent(game.components.LoadPriority({priority: 3}));
   wordWall.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   wordWall.addComponent(game.components.Pushable({pushable: true}));
+  wordWall.addComponent(game.components.Alive());
   wordWall.sprite = game.sprites.wordWall;
   return wordWall;
 }

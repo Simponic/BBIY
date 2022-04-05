@@ -1,0 +1,1 @@
+game.components.Alive = () => game.Component('alive');
