@@ -43,7 +43,7 @@ game.system.GridSystem = ({ xDim, yDim }) => {
         entity.components.appearance.height = gridHeight;
       }
       if (entity.hasComponent("position")) {
-        const newGridCoords = gameCoordsToGrid(entity.components.position);
+        let newGridCoords = gameCoordsToGrid(entity.components.position);
         const oldGridCoords = entity.components.gridPosition;
         if (!equivalence(newGridCoords, oldGridCoords)) {
           const momentumVector = unitize({ 
@@ -51,33 +51,38 @@ game.system.GridSystem = ({ xDim, yDim }) => {
             dy: newGridCoords.y - oldGridCoords.y,
           });
 
-          const proposed = {
-            x: entity.components.gridPosition.x + momentumVector.dx,
-            y: entity.components.gridPosition.y + momentumVector.dy
-          };
-					
-          const proposedCopy = {...proposed};
+          const proposed = {...newGridCoords};
           if (entity.hasComponent("controllable")) {
             let found = false;
             do {
               found = false;
-              const entitiesInCell = entitiesGrid[proposedCopy.y][proposedCopy.x];
-              entitiesInCell.forEach((entity) => {
+              const entitiesInCell = entitiesGrid[proposed.y][proposed.x];
+              for (let entity of entitiesInCell.values()) {
                 if (entity.hasComponent("pushable")) {
-                  entity.addComponent(game.components.Momentum({...momentumVector}));
                   found = true;
+                  entity.addComponent(game.components.Momentum({...momentumVector}));
                 }
-              });
-              proposedCopy.x += momentumVector.dx;
-              proposedCopy.y += momentumVector.dy;
-              const proposedCopyInBounds = clamp(proposedCopy, xDim-1, yDim-1);
-              if (!equivalence(proposedCopyInBounds, proposedCopy)) {
+              }
+              proposed.x += momentumVector.dx;
+              proposed.y += momentumVector.dy;
+              const proposedClampedInBounds = clamp(proposed, xDim-1, yDim-1);
+              if (!equivalence(proposedClampedInBounds, proposed)) {
                 found = false;
               }
             } while (found);
           }
 
-          entity.components.gridPosition = {...entity.components.gridPosition, ...proposed};
+          if (entity.hasComponent("pushable") || entity.hasComponent("controllable")) {
+            for (let e of entitiesGrid[newGridCoords.y][newGridCoords.x].values()) {
+              if (e.hasComponent("stop")) {
+                newGridCoords = oldGridCoords;
+                break;
+              }
+            }
+            entity.addComponent(game.components.Momentum({...momentumVector}));
+          }
+
+          entity.components.gridPosition = {...entity.components.gridPosition, ...newGridCoords};
 
           entity.components.position = {
             ...entity.components.position,

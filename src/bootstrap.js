@@ -7,7 +7,7 @@ game.bootstrap = (() => {
       src: [
         'src/components/position.js', 'src/components/momentum.js', 'src/components/gridPosition.js',
         'src/components/appearence.js', 'src/components/controllable.js', 'src/components/pushable.js',
-        'src/components/loadPriority.js', 
+        'src/components/loadPriority.js', 'src/components/stop.js'
       ],
       id: 'components'
     },
