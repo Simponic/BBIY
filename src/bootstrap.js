@@ -32,7 +32,7 @@ game.bootstrap = (() => {
     { src: ['src/systems/system.js'], id: 'system' },
     { 
       src: [
-        'src/systems/render.js', 'src/systems/gridSystem.js', 'src/systems/physics.js', 'src/systems/keyboardInput.js'
+        'src/systems/render.js', 'src/systems/grid.js', 'src/systems/physics.js', 'src/systems/keyboardInput.js', 'src/systems/collision.js',
       ],
       id: 'systems' },
     { src: ['src/game.js'], id: 'game' },

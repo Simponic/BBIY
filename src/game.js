@@ -4,8 +4,11 @@ game.loop = (timeStamp) => {
   lastTimeStamp = timeStamp;
 
 
+  const changedIds = new Set();
   game.systemOrder.map((i) => {
-    game.systems[i].update(elapsedTime, game.entities);
+    game.systems[i]
+      .update(elapsedTime, game.entities, changedIds)
+      .forEach((id) => changedIds.add(id));
   });
 
   for (let id in game.entities) {
@@ -14,23 +17,22 @@ game.loop = (timeStamp) => {
     }
   }
 
-  if (game.nextLevel) {
-    game.loadLevel(game.nextLevel);
-    game.nextLevel = false;
-  }
-
   requestAnimationFrame(game.loop);
 }
 
 game.initialize = () => {
   [game.entities, game.config] = game.loadLevel(game.levels[0]);
 
-  game.systemOrder = ["render", "physics", "gridSystem", "keyboardInput"];
+  // Maintained by gridSystem as a side-effect
+  game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
+
+  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "render"];
   game.systems = {
-    render: game.system.Render(game.graphics),
-    physics: game.system.Physics(),
-    gridSystem: game.system.GridSystem({...game.config}),
+    physics: game.system.Physics(game.entitiesGrid),
+    gridSystem: game.system.Grid(game.entitiesGrid),
+    collisionSystem: game.system.Collision(game.entitiesGrid),
     keyboardInput: game.system.KeyboardInput(),
+    render: game.system.Render(game.graphics),
   };
 
   lastTimeStamp = performance.now()

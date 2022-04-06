@@ -6,7 +6,7 @@ game.system.KeyboardInput = () => {
       keys[event.key] = true;
     }
   };
-  const update = (elapsedTime, entities) => {
+  const update = (elapsedTime, entities, changedIds) => {
     for (let id in entities) {
       const entity = entities[id];
       if (entity.hasComponent('controllable')) {
@@ -24,6 +24,8 @@ game.system.KeyboardInput = () => {
       }
     }
     Object.keys(keys).map((key) => delete keys[key]);
+
+    return new Set();
   };
   window.addEventListener("keydown", keyPress);
   return { keys, update };
