@@ -34,6 +34,13 @@ game.sprites = {
     numFrames: 3,
     timePerFrame: 100,
   }),
+  lava: game.graphics.Sprite({
+    image: game.assets.lava,
+    spriteHeight: 24,
+    spriteWidth: 24,
+    numFrames: 3,
+    timePerFrame: 100,
+  }),
   rock: game.graphics.Sprite({
     image: game.assets.rock,
     spriteHeight: 24,
@@ -43,6 +50,13 @@ game.sprites = {
   }),
   wall: game.graphics.Sprite({
     image: game.assets.wall,
+    spriteHeight: 24,
+    spriteWidth: 24,
+    numFrames: 3,
+    timePerFrame: 100,
+  }),
+  water: game.graphics.Sprite({
+    image: game.assets.water,
     spriteHeight: 24,
     spriteWidth: 24,
     numFrames: 3,

@@ -19,11 +19,32 @@ game.loadLevel = (level) => {
           case 'f':
             entity = game.createFlag();
             break;
+          case 'g':
+            entity = game.createGrass();
+            break;
           case 'l':
             entity = game.createFloor();
             break;
           case 'w':
             entity = game.createWall();
+            break;
+          case 'a':
+            entity = game.createWater();
+            break;
+          case 'A':
+            entity = game.createWordWater();
+            break;
+          case 'N':
+            entity = game.createWordSink();
+            break;
+          case 'V':
+            entity = game.createWordLava();
+            break;
+          case 'v':
+            entity = game.createLava();
+            break;
+          case 'K':
+            entity = game.createWordKill();
             break;
           case 'W':
             entity = game.createWordWall();

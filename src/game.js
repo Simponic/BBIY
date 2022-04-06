@@ -21,7 +21,7 @@ game.loop = (timeStamp) => {
 }
 
 game.initialize = () => {
-  [game.entities, game.config] = game.loadLevel(game.levels[0]);
+  [game.entities, game.config] = game.loadLevel(game.levels[4]);
 
   // Maintained by gridSystem as a side-effect
   game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));

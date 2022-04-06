@@ -21,11 +21,11 @@ game.bootstrap = (() => {
     { 
       src: [
         'src/entities/bigblue.js', 'src/entities/flag.js', 'src/entities/floor.js', 'src/entities/grass.js', 'src/entities/hedge.js',
-        'src/entities/liquid.js', 'src/entities/rock.js', 'src/entities/wall.js', 'src/entities/wordBigBlue.js', 
+        'src/entities/lava.js', 'src/entities/rock.js', 'src/entities/wall.js', 'src/entities/wordBigBlue.js', 
         'src/entities/wordFlag.js', 'src/entities/wordIs.js', 'src/entities/wordKill.js', 'src/entities/wordLava.js',
         'src/entities/wordPush.js', 'src/entities/wordRock.js', 'src/entities/wordSink.js', 'src/entities/wordStop.js', 
         'src/entities/wordWall.js', 'src/entities/wordWater.js', 'src/entities/wordWin.js', 'src/entities/wordYou.js',
-        'src/entities/borderParticles.js'
+        'src/entities/borderParticles.js', 'src/entities/water.js'
       ],
       id: 'entities'
     },
@@ -39,10 +39,10 @@ game.bootstrap = (() => {
   ];
   const assets = {};
   [
-    "bigblue", "flag", "floor", "grass", "hedge", "liquid", "rock", 
+    "bigblue", "flag", "floor", "grass", "hedge", "lava", "rock", 
     "wall", "wordBigBlue", "wordFlag", "wordIs", "wordKill", "wordLava", 
     "wordPush", "wordRock", "wordSink", "wordStop", "wordWall", "wordWater", 
-    "wordWin", "wordYou"
+    "wordWin", "wordYou", "water"
   ].map((x) => assets[x] = `assets/image/${x}.png`);
   [
     "background-music", "death", "move", "win"
