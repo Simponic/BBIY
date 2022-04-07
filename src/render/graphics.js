@@ -6,7 +6,7 @@ game.graphics = (
       context.clearRect(0, 0, game.canvas.width, game.canvas.height);
     };
     
-    const Sprite = ({image, spriteX, spriteY, spriteWidth, spriteHeight, timePerFrame, cols, rows, numFrames, drawFunction}) => {
+    const Sprite = ({image, spriteX, spriteY, spriteWidth, spriteHeight, timePerFrame, cols, rows, numFrames, color, drawFunction}) => {
       timePerFrame = timePerFrame ?? 100;
       numFrames = numFrames ?? 1;
       cols = cols ?? numFrames;
@@ -33,6 +33,15 @@ game.graphics = (
           const row = currentFrame % rows;
           const col = Math.floor(currentFrame / rows);
           context.drawImage(image, spriteX+col*spriteWidth, spriteY+row*spriteHeight, spriteWidth, spriteHeight, x, y, width, height);
+
+					// apply color to sprite 
+					if (color) {
+						context.globalAlpha=0.7;
+						context.globalCompositeOperation="source-atop";
+						context.fillStyle=color;
+						context.fillRect(x, y, width, height);
+					}
+
           context.restore();
         };
       } else {
