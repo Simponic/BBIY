@@ -1,0 +1,1 @@
+game.components.Sprite = ({spriteName}) => game.Component('sprite', {spriteName});

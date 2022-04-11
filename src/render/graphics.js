@@ -52,4 +52,4 @@ game.graphics = (
 
     return { clear, Sprite };
   }
-)(document.getElementById("game-canvas").getContext("2d"));
+)(game.canvas.context);

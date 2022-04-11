@@ -31,9 +31,7 @@ game.createBorderParticles = ({colors, maxAmount, minAmount, minLife, maxLife, m
     }
     return particle;
   });
-  particles.addComponent(game.components.LoadPriority({priority: 1}));
-  particles.addComponent(game.components.Alive());
-  particles.sprite = game.graphics.Sprite({
+  game.sprites.borderParticle = game.graphics.Sprite({
     drawFunction: (elapsedTime, {x, y, width, height}, context) => {
       particleSpecs.map((spec) => spec.elapsed += elapsedTime);
       particleSpecs = particleSpecs.filter((spec) => spec.lifetime > spec.elapsed);
@@ -51,5 +49,8 @@ game.createBorderParticles = ({colors, maxAmount, minAmount, minLife, maxLife, m
       });
     }
   })
+  particles.addComponent(game.components.LoadPriority({priority: 1}));
+  particles.addComponent(game.components.Alive());
+  particles.addComponent(game.components.Sprite({spriteName: "borderParticle"}))
   return particles;
 }

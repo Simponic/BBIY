@@ -1,1 +1,1 @@
-game.components.Stop = ({stop}) => game.Component("stop", {stop});
+game.components.Stop = () => game.Component("stop");

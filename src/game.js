@@ -26,14 +26,14 @@ game.initialize = () => {
   // Maintained by gridSystem as a side-effect
   game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
 
-  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "render"];
-  game.systems = {
-    physics: game.system.Physics(game.entitiesGrid),
-    gridSystem: game.system.Grid(game.entitiesGrid),
-    collisionSystem: game.system.Collision(game.entitiesGrid),
-    keyboardInput: game.system.KeyboardInput(),
-    render: game.system.Render(game.graphics),
-  };
+  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "undo", "render"];
+  game.systems = { };
+  game.systems.physics = game.system.Physics(),
+  game.systems.gridSystem = game.system.Grid(game.entitiesGrid);
+  game.systems.collisionSystem = game.system.Collision(game.entitiesGrid);
+  game.systems.render = game.system.Render(game.graphics);
+  game.systems.undo = game.system.Undo(game.entitiesGrid);
+  game.systems.keyboardInput = game.system.KeyboardInput(game.systems.undo);
 
   lastTimeStamp = performance.now()
   requestAnimationFrame(game.loop);

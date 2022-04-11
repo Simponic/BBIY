@@ -4,6 +4,6 @@ game.createWordWin = () => {
   wordWin.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   wordWin.addComponent(game.components.Pushable({pushable: true}));
   wordWin.addComponent(game.components.Alive());
-  wordWin.sprite = game.sprites.wordWin;
+  wordWin.addComponent(game.components.Sprite({spriteName: "wordWin"}))
   return wordWin;
 }

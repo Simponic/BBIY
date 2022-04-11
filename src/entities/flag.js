@@ -3,6 +3,6 @@ game.createFlag = () => {
   flag.addComponent(game.components.LoadPriority({priority: 2}));
   flag.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   flag.addComponent(game.components.Alive());
-  flag.sprite = game.sprites.flag;
+  flag.addComponent(game.components.Sprite({spriteName: "flag"}))
   return flag;
 }

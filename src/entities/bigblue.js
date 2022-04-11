@@ -3,7 +3,7 @@ game.createBigBlue = () => {
   bigBlue.addComponent(game.components.LoadPriority({priority: 1}));
   bigBlue.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   bigBlue.addComponent(game.components.Alive());
-  bigBlue.sprite = game.sprites.bigBlue;
+  bigBlue.addComponent(game.components.Sprite({spriteName: "bigBlue"}))
   
   // TODO: Remove this
   bigBlue.addComponent(game.components.Controllable({controls: ['left', 'right', 'up', 'down']}));

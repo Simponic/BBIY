@@ -3,6 +3,6 @@ game.createFloor = () => {
   floor.addComponent(game.components.LoadPriority({priority: 5}));
   floor.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   floor.addComponent(game.components.Alive());
-  floor.sprite = game.sprites.floor;
+  floor.addComponent(game.components.Sprite({spriteName: "floor"}))
   return floor;
 }

@@ -4,6 +4,6 @@ game.createWordKill = () => {
   wordKill.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   wordKill.addComponent(game.components.Pushable({pushable: true}));
   wordKill.addComponent(game.components.Alive());
-  wordKill.sprite = game.sprites.wordKill;
+  wordKill.addComponent(game.components.Sprite({spriteName: "wordKill"}))
   return wordKill;
 }

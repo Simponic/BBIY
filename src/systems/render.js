@@ -10,8 +10,8 @@ game.system.Render = (graphics) => {
     });
 
     sortedEntities.forEach((entity) => {
-      if (entity.sprite && entity.hasComponent("position") && entity.hasComponent("appearance")) {
-        entity.sprite.draw(elapsedTime, {...entity.components.position, ...entity.components.appearance});
+      if (entity.hasComponent("position") && entity.hasComponent("appearance") && entity.hasComponent("sprite")) {
+        game.sprites[entity.components.sprite.spriteName].draw(elapsedTime, {...entity.components.position, ...entity.components.appearance});
       }
     });
 

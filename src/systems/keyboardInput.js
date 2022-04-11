@@ -1,4 +1,4 @@
-game.system.KeyboardInput = () => {
+game.system.KeyboardInput = (undoSystem) => {
   "use strict";
   const keys = {};
   const keyPress = (event) => {
@@ -20,8 +20,10 @@ game.system.KeyboardInput = () => {
         } else if (controls.includes('down') && keys['ArrowDown']) {
           entity.addComponent(game.components.Momentum({ dx: 0, dy: 1 }));
         }
-
       }
+    }
+    if (keys['z']) {
+      undoSystem.undo(entities);
     }
     Object.keys(keys).map((key) => delete keys[key]);
 
