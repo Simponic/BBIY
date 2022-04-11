@@ -3,7 +3,6 @@ game.system.Undo = (entitiesGrid) => {
 
   const update = (elapsedTime, entities, changedIds) => {
     if (changedIds.size) {
-      lastUndid = false;
       const state = {};
       for (let id in entities) {
         if (entities[id].hasComponent("gridPosition")) {
@@ -16,15 +15,14 @@ game.system.Undo = (entitiesGrid) => {
   }
 
   const undo = (entities) => {
-    states.map((state) => console.log(state[65].gridPosition));
     let state = states.slice(0, -1).pop();
+    if (states.length > 1) {
+      states.pop();
+    }
     for (let id in state) {
       for (let componentName in state[id]) {
         entities[id].addComponent({name: componentName, ...state[id][componentName]});
       }
-    }
-    if (states.length > 1) {
-      states.pop();
     }
   }
 
