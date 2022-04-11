@@ -11,14 +11,16 @@ game.system.KeyboardInput = (undoSystem) => {
       const entity = entities[id];
       if (entity.hasComponent('controllable')) {
         const controls = entity.components.controllable.controls;
-        if (controls.includes('left') && keys['ArrowLeft']) {
-          entity.addComponent(game.components.Momentum({ dx: -1, dy: 0 }));
-        } else if (controls.includes('right') && keys['ArrowRight']) {
-          entity.addComponent(game.components.Momentum({ dx: 1, dy: 0 }));
-        } else if (controls.includes('up') && keys['ArrowUp']) {
-          entity.addComponent(game.components.Momentum({ dx: 0, dy: -1 }));
-        } else if (controls.includes('down') && keys['ArrowDown']) {
-          entity.addComponent(game.components.Momentum({ dx: 0, dy: 1 }));
+        if (!changedIds.has(entity.id)) {
+          if (controls.includes('left') && keys['ArrowLeft']) {
+            entity.addComponent(game.components.Momentum({ dx: -1, dy: 0 }));
+          } else if (controls.includes('right') && keys['ArrowRight']) {
+            entity.addComponent(game.components.Momentum({ dx: 1, dy: 0 }));
+          } else if (controls.includes('up') && keys['ArrowUp']) {
+            entity.addComponent(game.components.Momentum({ dx: 0, dy: -1 }));
+          } else if (controls.includes('down') && keys['ArrowDown']) {
+            entity.addComponent(game.components.Momentum({ dx: 0, dy: 1 }));
+          }
         }
       }
     }
