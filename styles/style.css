@@ -1,16 +1,25 @@
 body {
   margin: 0;
   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
+  background-image: url("/assets/image/background.gif");
+  background-size: cover;
+  image-rendering: pixelated;
 }
 
+.canvas-holder {
+  padding-top: 4vh;
+  padding-bottom: 4vh;
+}
 .canvas-holder canvas {
   padding: 0;
   margin: auto;
   display: block;
-  height: 100vh;
+  height: 90vh;
   width: auto;
+  border: 3px solid grey;
+  border-radius: 5px;
   max-width: 100%;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.95);
 }
 
 .game-hud {
