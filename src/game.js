@@ -26,7 +26,7 @@ game.initialize = () => {
   // Maintained by gridSystem as a side-effect
   game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
 
-  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "undo", "render"];
+  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "undo", "particle", "render"];
   game.systems = { };
   game.systems.physics = game.system.Physics(),
   game.systems.gridSystem = game.system.Grid(game.entitiesGrid);
@@ -34,6 +34,7 @@ game.initialize = () => {
   game.systems.render = game.system.Render(game.graphics);
   game.systems.undo = game.system.Undo(game.entitiesGrid);
   game.systems.keyboardInput = game.system.KeyboardInput(game.systems.undo);
+  game.systems.particle = game.system.Particle(game.canvas.context);
 
   lastTimeStamp = performance.now()
   requestAnimationFrame(game.loop);

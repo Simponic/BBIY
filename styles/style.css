@@ -19,7 +19,7 @@ body {
   border: 3px solid grey;
   border-radius: 5px;
   max-width: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 25, 0.9);
 }
 
 .game-hud {

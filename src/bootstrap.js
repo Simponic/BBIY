@@ -14,7 +14,7 @@ game.bootstrap = (() => {
         'src/components/position.js', 'src/components/momentum.js', 'src/components/gridPosition.js',
         'src/components/appearence.js', 'src/components/controllable.js', 'src/components/pushable.js',
         'src/components/loadPriority.js', 'src/components/stop.js', 'src/components/alive.js',
-        'src/components/sprite.js'
+        'src/components/sprite.js', 'src/components/particles.js'
       ],
       id: 'components'
     },
@@ -34,7 +34,7 @@ game.bootstrap = (() => {
     { 
       src: [
         'src/systems/render.js', 'src/systems/grid.js', 'src/systems/physics.js', 'src/systems/keyboardInput.js', 
-        'src/systems/collision.js', 'src/systems/undo.js'
+        'src/systems/collision.js', 'src/systems/undo.js', 'src/systems/particle.js'
       ],
       id: 'systems' },
     { src: ['src/game.js'], id: 'game' },
