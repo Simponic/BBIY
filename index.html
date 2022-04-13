@@ -21,11 +21,24 @@
 
     <script>
       const game = {
+        running: true,
+        lastTimeStamp: performance.now(),
+        controls: JSON.parse(
+          localStorage.getItem("controls") || JSON.stringify({
+            left: "ArrowLeft",
+            right: "ArrowRight",
+            up: "ArrowUp",
+            down: "ArrowDown",
+            undo: "z",
+            reset: "r",
+          })
+        ),
+        level: 0,
         canvas: {
           width: document.getElementById('game-canvas').width,
           height: document.getElementById('game-canvas').height,
           context: document.getElementById('game-canvas').getContext("2d"),
-        }
+        },
       };
     </script>
 

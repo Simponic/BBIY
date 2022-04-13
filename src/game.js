@@ -1,8 +1,10 @@
-let lastTimeStamp;
 game.loop = (timeStamp) => {
-  let elapsedTime = timeStamp - lastTimeStamp;
-  lastTimeStamp = timeStamp;
+  if (!game.running) {
+    return;
+  }  
 
+  let elapsedTime = timeStamp - game.lastTimeStamp;
+  game.lastTimeStamp = timeStamp;
 
   const changedIds = new Set();
   game.systemOrder.map((i) => {
@@ -20,22 +22,39 @@ game.loop = (timeStamp) => {
   requestAnimationFrame(game.loop);
 }
 
-game.initialize = () => {
-  [game.entities, game.config] = game.loadLevel(game.levels[4]);
+game.toggleRunning = () => {
+  game.running = !game.running;
+}
 
-  // Maintained by gridSystem as a side-effect
-  game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
+game.startLoop = () => {
+  game.running = true;
+  game.lastTimeStamp = performance.now();
+  requestAnimationFrame(game.loop);
+}
 
-  game.systemOrder = ["gridSystem", "collisionSystem", "physics", "keyboardInput", "undo", "particle", "render"];
+game.loadSystems = () => {
+  game.systemOrder = ["grid", "collision", "physics", "keyboardInput", "undo", "particle", "render"];
   game.systems = { };
   game.systems.physics = game.system.Physics(),
-  game.systems.gridSystem = game.system.Grid(game.entitiesGrid);
-  game.systems.collisionSystem = game.system.Collision(game.entitiesGrid);
+  game.systems.grid = game.system.Grid(game.entitiesGrid);
+  game.systems.collision = game.system.Collision(game.entitiesGrid);
   game.systems.render = game.system.Render(game.graphics);
   game.systems.undo = game.system.Undo(game.entitiesGrid);
-  game.systems.keyboardInput = game.system.KeyboardInput(game.systems.undo);
   game.systems.particle = game.system.Particle(game.canvas.context);
+  game.systems.keyboardInput = game.system.KeyboardInput();
+  game.systems.menu = game.system.Menu();
+}
 
-  lastTimeStamp = performance.now()
-  requestAnimationFrame(game.loop);
+game.loadLevelIndex = (level) => {
+  game.level = level;
+  [game.entities, game.config] = game.loadLevel(game.levels[game.level]);
+
+  // Maintained by grid system as a side-effect
+  game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
+  game.loadSystems();
+}
+
+game.initialize = () => {
+  game.loadLevelIndex(0);
+  game.startLoop();
 }

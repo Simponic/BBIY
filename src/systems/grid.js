@@ -26,7 +26,9 @@ game.system.Grid = (entitiesGrid) => {
       }
     }));
     changedIds.forEach(id => {
-      const entity = entities[id];
+      // TODO: Figure out why we HAVE to use game.entities rather than entities
+      // Hint: it breaks when changing a level in the menu
+      const entity = game.entities[id];
       const { x, y } = entity.components.gridPosition;
       entitiesGrid[y][x].set(entity.id, entity);
     });
