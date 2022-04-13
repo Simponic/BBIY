@@ -7,7 +7,8 @@ game.bootstrap = (() => {
       ],
       id: 'utils'
     },
-    { src: ['src/render/graphics.js', 'src/render/sprites.js'], id: 'graphics' },
+    { src: ['src/render/graphics.js'], id: 'graphics' },
+    { src: ['src/render/sprites.js'], id: 'sprites' },
     { src: ['src/components/component.js'], id: 'component' },
     { 
       src: [
