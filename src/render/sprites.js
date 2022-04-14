@@ -12,7 +12,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#ede285",
   }),
   floor: game.graphics.Sprite({
     image: game.assets.floor,
@@ -20,7 +19,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#404040",
   }),
   hedge: game.graphics.Sprite({
     image: game.assets.hedge,
@@ -28,7 +26,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 250,
-		color: "#5c8339",
   }),
   grass: game.graphics.Sprite({
     image: game.assets.grass,
@@ -36,7 +33,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#5c8339",
   }),
   lava: game.graphics.Sprite({
     image: game.assets.lava,
@@ -44,7 +40,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#e49950",
   }),
   rock: game.graphics.Sprite({
     image: game.assets.rock,
@@ -52,7 +47,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#90673e",
   }),
   wall: game.graphics.Sprite({
     image: game.assets.wall,
@@ -60,7 +54,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#707070",
   }),
   water: game.graphics.Sprite({
     image: game.assets.water,
@@ -68,7 +61,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#5f9dd1",
   }),
   wordBigBlue: game.graphics.Sprite({
     image: game.assets.wordBigBlue,
@@ -76,7 +68,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#0f2439",
   }),
   wordFlag: game.graphics.Sprite({
     image: game.assets.wordFlag,
@@ -84,7 +75,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#ede285",
   }),
   wordIs: game.graphics.Sprite({
     image: game.assets.wordIs,
@@ -92,7 +82,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#ffffff",
   }),
   wordKill: game.graphics.Sprite({
     image: game.assets.wordKill,
@@ -100,7 +89,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#e49950",
   }),
   wordLava: game.graphics.Sprite({
     image: game.assets.wordLava,
@@ -108,7 +96,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#e49950",
   }),
   wordPush: game.graphics.Sprite({
     image: game.assets.wordPush,
@@ -116,7 +103,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#90673e",
   }),
   wordRock: game.graphics.Sprite({
     image: game.assets.wordRock,
@@ -124,7 +110,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#90673e",
   }),
   wordSink: game.graphics.Sprite({
     image: game.assets.wordSink,
@@ -132,7 +117,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#5f9dd1",
   }),
   wordStop: game.graphics.Sprite({
     image: game.assets.wordStop,
@@ -140,7 +124,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#252e0e",
   }),
   wordWall: game.graphics.Sprite({
     image: game.assets.wordWall,
@@ -148,7 +131,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#707070",
   }),
   wordWater: game.graphics.Sprite({
     image: game.assets.wordWater,
@@ -156,7 +138,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#5f9dd1",
   }),
   wordWin: game.graphics.Sprite({
     image: game.assets.wordWin,
@@ -164,7 +145,6 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#ede285",
   }),
   wordYou: game.graphics.Sprite({
     image: game.assets.wordYou,
@@ -172,6 +152,5 @@ game.sprites = {
     spriteWidth: 24,
     numFrames: 3,
     timePerFrame: 100,
-		color: "#0f2439",
   }),
 };

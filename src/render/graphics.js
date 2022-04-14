@@ -34,14 +34,6 @@ game.graphics = (
           const col = Math.floor(currentFrame / rows);
           context.drawImage(image, spriteX+col*spriteWidth, spriteY+row*spriteHeight, spriteWidth, spriteHeight, x, y, width, height);
 
-					// apply color to sprite 
-					if (color) {
-						context.globalAlpha=0.7;
-						context.globalCompositeOperation="source-atop";
-						context.fillStyle=color;
-						context.fillRect(x, y, width, height);
-					}
-
           context.restore();
         };
       } else {
