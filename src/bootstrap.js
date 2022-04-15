@@ -1,4 +1,6 @@
 game.bootstrap = (() => {
+  const image_extensions = ["png", "jpeg", "jpg"];
+  const audio_extensions = ["mp3"];
   const scripts = [
     { 
       src: [
@@ -68,13 +70,18 @@ game.bootstrap = (() => {
     .then((r) => r.blob())
     .then((r) => {
       let asset;
-      if (["png", "jpg", "jpeg"].includes(fileExtension)) {
+      if (image_extensions.includes(fileExtension)) {
         asset = new Image();
-      } else if (["mp3"].includes(fileExtension)) {
+      } else if (audio_extensions.includes(fileExtension)) {
         asset = new Audio();
       }
       asset.src = URL.createObjectURL(r);
-      asset.onload = () => URL.revokeObjectURL(asset.src);
+      const ready = () => URL.revokeObjectURL(asset.src);
+      if (asset instanceof Image) {
+        asset.onload = ready;
+      } else if (asset instanceof Audio) {
+        asset.oncanplaythrough = ready;
+      }
       return asset;
     })
   }
