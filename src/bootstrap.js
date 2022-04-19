@@ -53,7 +53,7 @@ game.bootstrap = (() => {
     "wordWin", "wordYou", "water"
   ].map((x) => assets[x] = `assets/image/${x}.png`);
   [
-    "background-music", "death", "move", "win"
+    "music", "death", "move", "win"
   ].map((x) => assets[x] = `assets/sound/${x}.mp3`);
 
   const loadScripts = function(onDone) {

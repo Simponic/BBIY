@@ -11,6 +11,7 @@ game.system.Collision = (entitiesGrid) => {
               burnedParticleSpawner.addComponent(game.components.Appearance({width: game.canvas.width / game.config.xDim, height: game.canvas.height / game.config.yDim}));
               game.entities[burnedParticleSpawner.id] = burnedParticleSpawner;
               entity.removeComponent("alive");
+              game.assets.death.play();
               break;
             } else if (entity.hasComponent("sinkable") && collided.hasComponent("sink")) {
               const sunkParticleSpawner = game.createBorderParticles({colors: ["#16f7c9", "#0d6e5a", "#2fa18a", "#48cfb4", "#58877d", "#178054", "#2cdb92"]});
@@ -19,6 +20,7 @@ game.system.Collision = (entitiesGrid) => {
               game.entities[sunkParticleSpawner.id] = sunkParticleSpawner;
               entity.removeComponent("alive");
               collided.removeComponent("alive");
+              game.assets.death.play();
               break;
             }
           }
@@ -27,6 +29,8 @@ game.system.Collision = (entitiesGrid) => {
       if (entity.hasComponent("controllable") && entity.hasComponent("gridPosition")) {
         for (let collided of entitiesGrid[entity.components.gridPosition.y][entity.components.gridPosition.x].values()) {
           if (collided.hasComponent("win")) {
+            game.assets.win.play();
+            game.win = true;
             game.systems.menu.bringUpMenu();
             game.systems.menu.setState("levelSelect");
           }
@@ -70,6 +74,7 @@ game.system.Collision = (entitiesGrid) => {
           if (wall) {
             entity.removeComponent("momentum");
           } else {
+            game.assets.move.play();
             entitiesToPush.map((e) => {
               const pushedParticleSpawner = game.createBorderParticles({maxSpeed: 0.1, minAmount: 10, maxAmount: 15});
               pushedParticleSpawner.addComponent(game.components.Position(e.components.position));

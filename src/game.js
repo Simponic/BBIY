@@ -29,6 +29,10 @@ game.toggleRunning = () => {
 game.startLoop = () => {
   game.running = true;
   game.lastTimeStamp = performance.now();
+  game.assets.music.play();
+  if (game.assets.music.paused) {
+    alert("Failed to start background music; please allow autoplay in your browser settings.");
+  }
   requestAnimationFrame(game.loop);
 };
 
@@ -47,6 +51,8 @@ game.loadSystems = () => {
 };
 
 game.loadLevelIndex = (level) => {
+  game.win = false;  
+
   game.level = level;
   [game.entities, game.config] = game.loadLevel(game.levels[game.level]);
 
@@ -56,6 +62,11 @@ game.loadLevelIndex = (level) => {
 };
 
 game.initialize = () => {
+  game.assets.music.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+  }, false);
+
   game.loadLevelIndex(0);
   game.startLoop();
 };

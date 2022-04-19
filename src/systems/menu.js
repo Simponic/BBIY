@@ -16,6 +16,7 @@ game.system.Menu = () => {
 
   const bringUpMenu = () => {
     game.running = false;
+    game.assets.music.pause();
     window.addEventListener("keydown", escapeEventListener);
     setState("main");
   };
@@ -82,6 +83,10 @@ game.system.Menu = () => {
             <br>
             Background is from <a href="https://i.pinimg.com/originals/b2/2a/a2/b22aa22b2f3f55b6468361158d52e2e7.gif">PinImg</a>.
             <br>
+            Music is <a href="https://www.youtube.com/watch?v=yQjAF3frudY">Fluffing A Duck</a> by Kevin MacLeod.
+            <br>
+            Other sound effects generated on <a href="https://www.sfxr.me/">SFXR</a>.
+            <br>
             Developed by Logan Hunt, Ethan Payne
           </p>
         </div>
@@ -97,7 +102,9 @@ game.system.Menu = () => {
           }
       `;
     }
-    menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.hide()'>Resume Game</div>";
+    if (!game.win) {
+      menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.hide()'>Resume Game</div>";
+    }
     if (state !== "main") {
       menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.setState(\"main\")'>Back</div>";
     }

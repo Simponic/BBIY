@@ -1,7 +1,10 @@
 game.system.Logic = (entitiesGrid) => {
   "use strict";
   let currentVerbRules = [];
-  let previousControllableIds = new Set();
+  let previousVerbState = {
+    controllable: new Set(),
+    win: new Set(),
+  };
   const isWord = (entity) => entity.hasComponent("gridPosition") && (entity.hasComponent("verb") || entity.hasComponent("noun"));
   
   const getFirstWordEntity = (gridPosition) => {
@@ -50,25 +53,35 @@ game.system.Logic = (entitiesGrid) => {
             if (component) {
               if (direction == "apply") {              
                 if (verb == "you") {
-                  if (!previousControllableIds.has(id)) {
+                  if (!previousVerbState.controllable.has(id)) {
                     const newYouParticleSpawner = game.createBorderParticles({colors: ["#ffc0cb", "#ffb6c1", "#ffc1cc", "#ffbcd9", "#ff1493"], minAmount: 80, maxAmount: 150, maxSpeed: 0.5});
                     newYouParticleSpawner.addComponent(game.components.Position(entity.components.position));
                     newYouParticleSpawner.addComponent(game.components.Appearance({width: game.canvas.width / game.config.xDim, height: game.canvas.height / game.config.yDim}));
                     game.entities[newYouParticleSpawner.id] = newYouParticleSpawner;
                   }
                 }
+                if (verb == "win") {
+                  if (!previousVerbState.win.has(id)) {
+                    game.assets.win.play();
+                  }
+                }
                 entity.addComponent(component);
               } else if (direction == "deapply") {
                 if (entity.hasComponent("controllable")) {
-                  previousControllableIds.add(id);
+                  previousVerbState.controllable.add(id);
+                }
+                if (entity.hasComponent("win")) {
+                  previousVerbState.win.add(id);
                 }
                 entity.removeComponent(component.name);
               }
             }
           }
         }
-        if (direction == "apply" && changedEntityIds.some((id) => previousControllableIds.has(id))) {
-          previousControllableIds = new Set();
+        if (direction == "apply") {
+          if (changedEntityIds.some((id) => previousVerbState.controllable.has(id))) {
+            previousVerbState.controllable = new Set();
+          }
         }
       }
       if (application.hasComponent("noun")) {
