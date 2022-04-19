@@ -14,36 +14,37 @@ game.loop = (timeStamp) => {
   });
 
   for (let id in game.entities) {
-    if (!game.entities[id].hasComponent("alive")) {
+    if (game.entities[id].hasComponent("particles") && !game.entities[id].hasComponent("alive")) {
       delete game.entities[id];
     }
   }
 
   requestAnimationFrame(game.loop);
-}
+};
 
 game.toggleRunning = () => {
   game.running = !game.running;
-}
+};
 
 game.startLoop = () => {
   game.running = true;
   game.lastTimeStamp = performance.now();
   requestAnimationFrame(game.loop);
-}
+};
 
 game.loadSystems = () => {
-  game.systemOrder = ["grid", "collision", "physics", "keyboardInput", "undo", "particle", "render"];
+  game.systemOrder = ["grid", "collision", "physics", "keyboardInput", "particle", "logic", "undo", "render"];
   game.systems = { };
   game.systems.physics = game.system.Physics(),
   game.systems.grid = game.system.Grid(game.entitiesGrid);
   game.systems.collision = game.system.Collision(game.entitiesGrid);
   game.systems.render = game.system.Render(game.graphics);
-  game.systems.undo = game.system.Undo(game.entitiesGrid);
   game.systems.particle = game.system.Particle(game.canvas.context);
   game.systems.keyboardInput = game.system.KeyboardInput();
+  game.systems.logic = game.system.Logic(game.entitiesGrid);
+  game.systems.undo = game.system.Undo(game.entitiesGrid, game.systems.logic, game.systems.grid);  
   game.systems.menu = game.system.Menu();
-}
+};
 
 game.loadLevelIndex = (level) => {
   game.level = level;
@@ -52,9 +53,9 @@ game.loadLevelIndex = (level) => {
   // Maintained by grid system as a side-effect
   game.entitiesGrid = Array(game.config.yDim).fill(null).map(() => Array(game.config.xDim).fill(null).map(() => new Map()));
   game.loadSystems();
-}
+};
 
 game.initialize = () => {
   game.loadLevelIndex(0);
   game.startLoop();
-}
+};

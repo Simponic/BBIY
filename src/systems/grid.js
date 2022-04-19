@@ -32,7 +32,7 @@ game.system.Grid = (entitiesGrid) => {
       const { x, y } = entity.components.gridPosition;
       entitiesGrid[y][x].set(entity.id, entity);
     });
-  }
+  };
 
   const update = (_elapsedTime, entities, changedIds) => {
     gridEntities = Object.keys(entities).filter((x) => entities[x].hasComponent("gridPosition")).map((x) => entities[x]);

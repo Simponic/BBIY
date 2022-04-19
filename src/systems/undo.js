@@ -1,4 +1,4 @@
-game.system.Undo = (entitiesGrid) => {
+game.system.Undo = (entitiesGrid, logicSystem, gridSystem) => {
   const states = [];
 
   const update = (elapsedTime, entities, changedIds) => {
@@ -12,7 +12,7 @@ game.system.Undo = (entitiesGrid) => {
       states.push(state);
     }
     return new Set();
-  }
+  };
 
   const undo = (entities) => {
     let state = states.slice(0, -1).pop();
@@ -24,7 +24,9 @@ game.system.Undo = (entitiesGrid) => {
         entities[id].addComponent({name: componentName, ...state[id][componentName]});
       }
     }
-  }
+    gridSystem.update(0, entities, new Set());
+    logicSystem.parseRules(entities);
+  };
 
   return { update, undo };
-}
+};

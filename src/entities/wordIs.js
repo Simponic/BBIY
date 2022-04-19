@@ -5,6 +5,7 @@ game.createWordIs = () => {
   // wordIs.addComponent(game.components.Stop({stop: true}));
   wordIs.addComponent(game.components.Pushable());
   wordIs.addComponent(game.components.Alive());
-  wordIs.addComponent(game.components.Sprite({spriteName: "wordIs"}))
+  wordIs.addComponent(game.components.Sprite({spriteName: "wordIs"}));
+  wordIs.addComponent(game.components.Verb({action: "Is"}));
   return wordIs;
-}
+};

@@ -7,23 +7,23 @@ game.system.Menu = () => {
     if (e.key == "Escape") {
       setState('main');
     }
-  }
+  };
 
   const setState = (newState) => {
     state = newState;
     draw();
-  }
+  };
 
   const bringUpMenu = () => {
     game.running = false;
     window.addEventListener("keydown", escapeEventListener);
     setState("main");
-  }
+  };
 
   const hide = () => {
     menuElement.style.display = "none";
     game.startLoop();
-  }
+  };
 
   const listenFor = (action, elementId) => {
     const element = document.getElementById(elementId);
@@ -37,14 +37,14 @@ game.system.Menu = () => {
       game.controls[action] = event.key;
       localStorage.setItem("controls", JSON.stringify(game.controls));
       element.innerHTML = event.key;
-    }
+    };
     window.addEventListener("keydown", handleKey);
-  }
+  };
 
   const setLevel = (index) => {
     game.loadLevelIndex(index);
     hide();
-  }
+  };
 
   const draw = () => {
     menuElement.style.display = "block";
@@ -73,7 +73,7 @@ game.system.Menu = () => {
             Reset: <button id="reset" onfocus='game.systems.menu.listenFor("reset", "reset")'>${game.controls.reset}</button>
           </p>
         </div>
-      `
+      `;
     } else if (state == "credits") {
       menuElement.innerHTML += `
         <div>
@@ -85,23 +85,23 @@ game.system.Menu = () => {
             Developed by Logan Hunt, Ethan Payne
           </p>
         </div>
-      `
+      `;
     } else if (state == "levelSelect") {
       menuElement.innerHTML += `
         <div>
           <p> Select a level to play: </p>
           ${
             game.levels.map((level, index) => {
-              return `<div class='menu-button' onclick='game.systems.menu.setLevel(${index});'>${level.levelName}</div>`
+              return `<div class='menu-button' onclick='game.systems.menu.setLevel(${index});'>${level.levelName}</div>`;
             }).join("")
           }
       `;
     }
-    menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.hide()'>Resume Game</div>"
+    menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.hide()'>Resume Game</div>";
     if (state !== "main") {
-      menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.setState(\"main\")'>Back</div>"
+      menuElement.innerHTML += "<div class='menu-button' onclick='game.systems.menu.setState(\"main\")'>Back</div>";
     }
-  }
-
+  };
+    
   return { bringUpMenu, setState, listenFor, hide, setLevel, state };
-}
+};

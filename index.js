@@ -10,7 +10,7 @@ app.route('/').get((req, res) => {
 });
 
 app.route('/levels').get((req, res) => {
-  fs.readFile(path.join(__dirname, 'level-all.bbiy'), 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, 'levels-all.bbiy'), 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       return;

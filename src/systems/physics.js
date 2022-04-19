@@ -11,6 +11,6 @@ game.system.Physics = () => {
     }
 
     return new Set();
-  }
+  };
   return { update };
-}
+};

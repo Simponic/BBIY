@@ -10,7 +10,7 @@ game.system.Render = (graphics) => {
     });
 
     sortedEntities.forEach((entity) => {
-      if (entity.hasComponent("position") && entity.hasComponent("appearance")) {
+      if (entity.hasComponent("position") && entity.hasComponent("appearance") && entity.hasComponent("alive")) {
         const drawSpec = {...entity.components.position, ...entity.components.appearance};
         if (entity.hasComponent("sprite")) {
           game.sprites[entity.components.sprite.spriteName].draw(elapsedTime, drawSpec);
@@ -21,6 +21,6 @@ game.system.Render = (graphics) => {
     });
 
     return new Set();
-  }
+  };
   return { update };
 };

@@ -44,7 +44,7 @@ game.system.Collision = (entitiesGrid) => {
             pushedParticleSpawner.addComponent(game.components.Appearance({width: game.canvas.width / game.config.xDim, height: game.canvas.height / game.config.yDim}));
             game.entities[pushedParticleSpawner.id] = pushedParticleSpawner;
 
-            e.addComponent(game.components.Momentum({...momentum}))
+            e.addComponent(game.components.Momentum({...momentum}));
           });
         }
       }

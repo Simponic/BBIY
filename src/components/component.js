@@ -4,5 +4,5 @@ game.Component = (name, spec) => {
   return {
     name,
     ...spec
-  }
+  };
 };

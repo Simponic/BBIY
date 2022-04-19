@@ -19,7 +19,7 @@ game.system.Particle = () => {
       }
       return particleSpec;
     });
-  }
+  };
 
   const update = (elapsedTime, entities, _changedIds) => {
     for (let id in entities) {

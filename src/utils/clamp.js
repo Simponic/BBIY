@@ -3,4 +3,4 @@ const clamp = (vector, maxX, maxY) => {
   newVector.x = Math.max(0, Math.min(maxX, vector.x));
   newVector.y = Math.max(0, Math.min(maxY, vector.y));
   return newVector;
-}
+};

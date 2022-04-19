@@ -4,6 +4,7 @@ game.createWordRock = () => {
   wordRock.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   wordRock.addComponent(game.components.Pushable({pushable: true}));
   wordRock.addComponent(game.components.Alive());
-  wordRock.addComponent(game.components.Sprite({spriteName: "wordRock"}))
+  wordRock.addComponent(game.components.Sprite({spriteName: "wordRock"}));
+  wordRock.addComponent(game.components.Noun({select: "rock"}));
   return wordRock;
-}
+};
