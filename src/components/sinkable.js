@@ -1,0 +1,1 @@
+game.components.Sinkable = () => game.Component('sinkable', {});

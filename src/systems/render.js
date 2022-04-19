@@ -14,7 +14,7 @@ game.system.Render = (graphics) => {
         const drawSpec = {...entity.components.position, ...entity.components.appearance};
         if (entity.hasComponent("sprite")) {
           game.sprites[entity.components.sprite.spriteName].draw(elapsedTime, drawSpec);
-        } else if (entity.hasComponent("particles")) {
+        } else if (entity.hasComponent("particles") && entity.particleSprite) {
           entity.particleSprite.draw(elapsedTime, drawSpec); 
         }
       }

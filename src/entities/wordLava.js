@@ -6,5 +6,6 @@ game.createWordLava = () => {
   wordLava.addComponent(game.components.Alive());
 
   wordLava.addComponent(game.components.Sprite({spriteName: "wordLava"}))
+  wordLava.addComponent(game.components.Noun({select: "lava"}));
   return wordLava;
 }

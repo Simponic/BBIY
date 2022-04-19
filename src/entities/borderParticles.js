@@ -1,4 +1,4 @@
-game.createBorderParticles = () => {
+game.createBorderParticles = (spawnerSpec) => {
   const particleSpawner = game.Entity();
   const spawnFunction = (particleSpec) => {
     switch (Math.floor(Math.random() * 4)) {
@@ -24,7 +24,7 @@ game.createBorderParticles = () => {
   particleSpawner.addComponent(game.components.Particles({
     spec: {
       spawnFunction,
-      colors: ["#16f7c9", "#0d6e5a", "#2fa18a", "#48cfb4", "#58877d", "#178054", "#2cdb92"],
+      colors: ["#666666", "#777777", "#888888", "#999999"],
       maxSpeed: 0.20,
       minRadius: 1,
       maxRadius: 3,
@@ -32,6 +32,7 @@ game.createBorderParticles = () => {
       maxLife: 300,
       minAmount: 20,
       maxAmount: 50,
+      ...spawnerSpec,
     }
   }));
   particleSpawner.addComponent(game.components.LoadPriority({priority: 1}));

@@ -1,6 +1,7 @@
 game.system.Logic = (entitiesGrid) => {
   "use strict";
   let currentVerbRules = [];
+  let previousControllableIds = new Set();
   const isWord = (entity) => entity.hasComponent("gridPosition") && (entity.hasComponent("verb") || entity.hasComponent("noun"));
   
   const getFirstWordEntity = (gridPosition) => {
@@ -19,12 +20,16 @@ game.system.Logic = (entitiesGrid) => {
     "stop": game.components.Stop(),
     "push": game.components.Pushable(),
     "you": game.components.Controllable({controls: ['left', 'right', 'up', 'down']}),
-    
+    "burn": game.components.Burn(),    
+    "sink": game.components.Sink(),
+    "win": game.components.Win(),
   };
 
   const nounsToEntityCreators = {
     "rock": game.createRock,
     "wall": game.createWall,
+    "bigblue": game.createBigBlue,
+    "flag": game.createFlag,
   };
   
   const doOnRule = (rule, entities, direction) => {
@@ -38,26 +43,42 @@ game.system.Logic = (entitiesGrid) => {
           currentVerbRules.push(rule);
         }
         for (let id in entities) {
-          if (entities[id].hasComponent("name") && entities[id].components.name.selector == entityName) {
+          const entity = entities[id];
+          if (entity.hasComponent("alive") && entity.hasComponent("name") && entity.components.name.selector == entityName) {
             changedEntityIds.push(id);
             const component = verbActionsToComponent[verb];
             if (component) {
               if (direction == "apply") {              
-                entities[id].addComponent(component);
+                if (verb == "you") {
+                  if (!previousControllableIds.has(id)) {
+                    const newYouParticleSpawner = game.createBorderParticles({colors: ["#ffc0cb", "#ffb6c1", "#ffc1cc", "#ffbcd9", "#ff1493"], minAmount: 80, maxAmount: 150, maxSpeed: 0.5});
+                    newYouParticleSpawner.addComponent(game.components.Position(entity.components.position));
+                    newYouParticleSpawner.addComponent(game.components.Appearance({width: game.canvas.width / game.config.xDim, height: game.canvas.height / game.config.yDim}));
+                    game.entities[newYouParticleSpawner.id] = newYouParticleSpawner;
+                  }
+                }
+                entity.addComponent(component);
               } else if (direction == "deapply") {
-                entities[id].removeComponent(component.name);
+                if (entity.hasComponent("controllable")) {
+                  previousControllableIds.add(id);
+                }
+                entity.removeComponent(component.name);
               }
             }
           }
+        }
+        if (direction == "apply" && changedEntityIds.some((id) => previousControllableIds.has(id))) {
+          previousControllableIds = new Set();
         }
       }
       if (application.hasComponent("noun")) {
         const applicationEntityName = application.components.noun.select;
         for (let id in entities) {
-          if (entities[id].hasComponent("name") && entities[id].components.name.selector == entityName) {
+          const entity = entities[id];
+          if (entity.hasComponent("name") && entity.components.name.selector == entityName) {
             const e = nounsToEntityCreators[applicationEntityName]();
-            entities[id].components.name = e.components.name;
-            entities[id].components.sprite = e.components.sprite;
+            entity.components.name = e.components.name;
+            entity.components.sprite = e.components.sprite;
           }
         }
       }

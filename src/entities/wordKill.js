@@ -5,5 +5,6 @@ game.createWordKill = () => {
   wordKill.addComponent(game.components.Pushable({pushable: true}));
   wordKill.addComponent(game.components.Alive());
   wordKill.addComponent(game.components.Sprite({spriteName: "wordKill"}))
+  wordKill.addComponent(game.components.Verb({action: "burn"}));
   return wordKill;
 }

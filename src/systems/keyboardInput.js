@@ -12,7 +12,7 @@ game.system.KeyboardInput = () => {
   const update = (elapsedTime, entities, changedIds) => {
     for (let id in entities) {
       const entity = entities[id];
-      if (entity.hasComponent('controllable')) {
+      if (entity.hasComponent('controllable') && entity.hasComponent('alive')) {
         const controls = entity.components.controllable.controls;
         if (!changedIds.has(entity.id)) {
           if (controls.includes('left') && keys[game.controls.left]) {

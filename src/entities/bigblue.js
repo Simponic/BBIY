@@ -4,9 +4,10 @@ game.createBigBlue = () => {
   bigBlue.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   bigBlue.addComponent(game.components.Alive());
   bigBlue.addComponent(game.components.Sprite({spriteName: "bigBlue"}));
-  
 
 //  bigBlue.addComponent(game.components.Controllable({controls: ['left', 'right', 'up', 'down']}));
   bigBlue.addComponent(game.components.Name({selector: "bigblue"}));
+  bigBlue.addComponent(game.components.Burnable());
+  bigBlue.addComponent(game.components.Sinkable());
   return bigBlue;
 };

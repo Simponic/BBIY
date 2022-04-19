@@ -18,7 +18,9 @@ game.bootstrap = (() => {
         'src/components/appearence.js', 'src/components/controllable.js', 'src/components/pushable.js',
         'src/components/loadPriority.js', 'src/components/stop.js', 'src/components/alive.js',
         'src/components/sprite.js', 'src/components/particles.js', 'src/components/noun.js',
-        'src/components/name.js', 'src/components/verb.js',
+        'src/components/name.js', 'src/components/verb.js', 'src/components/burn.js', 
+        'src/components/burnable.js', 'src/components/sink.js', 'src/components/sinkable.js',
+        'src/components/win.js',
       ],
       id: 'components'
     },

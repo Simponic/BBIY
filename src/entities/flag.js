@@ -4,5 +4,6 @@ game.createFlag = () => {
   flag.addComponent(game.components.Appearance({rot: 0, width: 100, height: 100}));
   flag.addComponent(game.components.Alive());
   flag.addComponent(game.components.Sprite({spriteName: "flag"}))
+  flag.addComponent(game.components.Name({selector: "flag"}));
   return flag;
 }

@@ -8,6 +8,7 @@ game.createRock = () => {
 
 //  rock.addComponent(game.components.Pushable());
   rock.addComponent(game.components.Name({selector: "rock"}));
+  rock.addComponent(game.components.Sinkable());
 
   return rock;
 };
