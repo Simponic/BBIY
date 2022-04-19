@@ -5,5 +5,8 @@ game.createFlag = () => {
   flag.addComponent(game.components.Alive());
   flag.addComponent(game.components.Sprite({spriteName: "flag"}))
   flag.addComponent(game.components.Name({selector: "flag"}));
+
+  flag.addComponent(game.components.Burnable());
+  flag.addComponent(game.components.Sinkable());
   return flag;
 }
