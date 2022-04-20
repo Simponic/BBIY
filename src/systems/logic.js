@@ -90,8 +90,11 @@ game.system.Logic = (entitiesGrid) => {
           const entity = entities[id];
           if (entity.hasComponent("name") && entity.components.name.selector == entityName) {
             const e = nounsToEntityCreators[applicationEntityName]();
-            entity.components.name = e.components.name;
-            entity.components.sprite = e.components.sprite;
+            ["name", "sprite", "burnable", "sinkable"].map((name) => {
+              if (e.hasComponent(name)) {
+                entity.components[name] = e.components[name];
+              }
+            });
           }
         }
       }
