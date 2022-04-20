@@ -33,6 +33,8 @@ game.system.Logic = (entitiesGrid) => {
     "wall": game.createWall,
     "bigblue": game.createBigBlue,
     "flag": game.createFlag,
+    "lava": game.createLava,
+    "water": game.createWater,
   };
   
   const doOnRule = (rule, entities, direction) => {
