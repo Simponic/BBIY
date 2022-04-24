@@ -7,3 +7,11 @@ Most artwork is from the initial game, as found [here](https://www.spriters-reso
 Music is "Fluffing a Duck" by Kevin Macleod, found [on YouTube](https://www.youtube.com/watch?v=yQjAF3frudY).
 
 Background image is stolen [from here](https://i.pinimg.com/originals/b2/2a/a2/b22aa22b2f3f55b6468361158d52e2e7.gif).
+## Building and running
+
+It's as simple as:
+
+```
+npm install
+npm run start
+```
