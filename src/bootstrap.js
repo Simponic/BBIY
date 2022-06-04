@@ -106,7 +106,7 @@ game.bootstrap = (() => {
 
   const loadLevels = function() {
     game.levels = [];
-    fetch('/levels')
+    fetch('levels')
       .then((r) => r.json())
       .then((r) => game.levels = r);
   }

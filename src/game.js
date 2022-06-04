@@ -31,7 +31,7 @@ game.startLoop = () => {
   game.lastTimeStamp = performance.now();
   game.assets.music.play();
   if (game.assets.music.paused) {
-    alert("Failed to start background music; please allow autoplay in your browser settings.");
+    alert("Failed to start background music; please allow autoplay in your browser settings and refresh.");
   }
   requestAnimationFrame(game.loop);
 };

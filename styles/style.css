@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace;
-  background-image: url("/assets/image/background.gif");
+  background-image: url("/bbiy/assets/image/background.gif");
   background-size: cover;
   image-rendering: pixelated;
 }
