@@ -15,3 +15,6 @@ It's as simple as:
 npm install
 npm run start
 ```
+
+## Play online
+[on my website](https://simponic.xyz/bbiy/)
